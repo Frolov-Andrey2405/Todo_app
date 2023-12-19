@@ -7,6 +7,9 @@ function App() {
   const addTodoHandler = () => {
     console.log("click")
   }
+  const deleteTodoHandler = () => {
+    console.log("delete")
+  }
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -27,7 +30,16 @@ function App() {
         <div className="mt-5 flex flex-col space-y-5 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-10 lg:grid-cols-3">
           {todos?.map((todo, index) => (
             <div key={todo.id} className="max-w-xs mx-auto w-full p-5 h-full rounded-xl bg-slate-500 flex items-center justify-between">
-              <p>{todo.name}</p>
+              <p className="cursor-pointer">
+                {todo.name}
+                {" "}
+                {todo.status && (
+                  <span className="text-xs text-grey-300">(Comleted)</span>
+                )}
+              </p>
+              <i onClick={() => deleteTodoHandler(todo.id)}>
+                <TrashIcon className="h-5 w-5 cursor-pointer" fill="white" />
+              </i>
             </div>
         ))}</div>
     </div>
